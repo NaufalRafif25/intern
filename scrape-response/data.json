@@ -1,0 +1,19 @@
+{
+    "status" : true,
+    "message" : "Detail Data Post",
+    "data" : [
+        {       
+            "title": "sweater crewneck pria GOOD termurah /bahan fleece lembut dan tebal",
+            "normal_price": "90.000" ,
+            "diskon_price": "35.100" ,
+            "rating_bintang": "4"
+        },
+        {
+            "title": "DISTRO II SABLON DIGITAL BERKUALITAS|| KAOS PRIA WANITA",
+            "normal_price": "35.000" ,
+            "diskon_price": "13.900 - 18.900" ,
+            "rating_bintang": "4.3"
+        }
+    ]
+
+}
