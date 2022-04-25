@@ -82,26 +82,26 @@ app.post('/post1', (req,res)=> {
     const data = [scrape({ imageUrl: string, linkUrl: string, titleText: any, priceText: any })]
     res.send(data)
 })
-app.post('/post2', (req,res)=> {
-    console.log(req.body)
-    const data = {
-        status: true,
-        message: 'Detail Data Post',
-        data: [{
-            title: "sweater crewneck pria GOOD termurah / bahan fleece lembut dan tebal",
-            normal_price: 90000 ,
-            diskon_price: 35100 ,
-            rating_bintang: 4
-        },
-        {
-            title: "DISTRO II SABLON DIGITAL BERKUALITAS|| KAOS PRIA WANITA",
-            normal_price: 35000 ,
-            diskon_price: 13900 +' - '+ 18900 ,
-            rating_bintang: 4.3
-        }]
-    }
-    res.send(data)
-})
+// app.post('/post2', (req,res)=> {
+//     console.log(req.body)
+//     const data = {
+//         status: true,
+//         message: 'Detail Data Post',
+//         data: [{
+//             title: "sweater crewneck pria GOOD termurah / bahan fleece lembut dan tebal",
+//             normal_price: 90000 ,
+//             diskon_price: 35100 ,
+//             rating_bintang: 4
+//         },
+//         {
+//             title: "DISTRO II SABLON DIGITAL BERKUALITAS|| KAOS PRIA WANITA",
+//             normal_price: 35000 ,
+//             diskon_price: 13900 +' - '+ 18900 ,
+//             rating_bintang: 4.3
+//         }]
+//     }
+//     res.send(data)
+// })
 app.listen(3000, () => {
     console.log("Listening on port 3000")
 })
