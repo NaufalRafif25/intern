@@ -15,10 +15,10 @@ let scrape = async () => {
     await page.waitFor(5000);
 
     // ******************************** close popup
-    await page.evaluate(() => {
-        document.querySelector("#main > div > div:nth-child(4) > div > div > shopee-banner-popup-stateful").shadowRoot.querySelector("div > div > div > div > div").click();
-       });
-       await page.waitFor(6000);
+    // await page.evaluate(() => {
+    //     document.querySelector("#main > div > div:nth-child(4) > div > div > shopee-banner-popup-stateful").shadowRoot.querySelector("div > div > div > div > div").click();
+    //    });
+    //    await page.waitFor(6000);
 
     // ***************** Scroll page ke bawah
     await autoScroll(page);
@@ -27,7 +27,7 @@ let scrape = async () => {
     const result = await page.evaluate(() => {
         let data = [];
         
-        let elements = document.querySelectorAll('#main > div > div:nth-child(4) > div > div > div.container > div.section-below-the-fold > div.section-recommend-products-wrapper > div > div > div.stardust-tabs-panels > section:nth-child(1) > div > div');
+        let elements = document.querySelectorAll('#main > div > div:nth-child(4) > div > div > div.container > div.section-below-the-fold > div.section-recommend-products-wrapper > div > div > div.stardust-tabs-panels > section:nth-child(1) > div > div:nth-child(1)');
 
         for (var element of elements) {
             let image = element.querySelector('a > div > div > div > img');
@@ -77,9 +77,9 @@ app.get('/get1', (req,res)=> {
     console.log(req.body)
     res.send(scrape.result)
 })
-app.post('/post1', (req,res)=> {
+app.post('/post1', async (req,res)=> {
     console.log(req.body)
-    const data = [scrape({ imageUrl: string, linkUrl: string, titleText: any, priceText: any })]
+    const data = await scrape()
     res.send(data)
 })
 // app.post('/post2', (req,res)=> {
