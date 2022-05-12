@@ -1,10 +1,7 @@
-const express = require('express')
-const app = express()
 const puppeteer = require('puppeteer')
-const bodyParser = require('body-parser')
 
 let scrape = async () => {
-    const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
 
     await page.goto('https://shopee.co.id/', {
@@ -19,9 +16,10 @@ let scrape = async () => {
     //     document.querySelector("#main > div > div:nth-child(4) > div > div > shopee-banner-popup-stateful").shadowRoot.querySelector("div > div > div > div > div").click();
     //    });
     //    await page.waitFor(6000);
-
     // ***************** Scroll page ke bawah
+
     await autoScroll(page);
+    await page.waitFor(5000);
 
     // ***************** Scraping data
     const result = await page.evaluate(() => {
@@ -35,8 +33,6 @@ let scrape = async () => {
             let title = element.querySelector('a > div > div > div > div > div > div');
             let price = element.querySelector('a > div > div > div > div > div > span:nth-child(2)');
 
-            /// Cek kondisi jika image tidak ada
-            /// kemarin error disini, image nya null tapi kamu masih mau akses
             if(image == null)continue;
             let imageUrl = image.getAttribute('src');
             let linkUrl = "https://shopee.co.id/"+link.getAttribute('href');
@@ -49,7 +45,8 @@ let scrape = async () => {
     });
     browser.close();
     return result;
-}
+};
+
 async function autoScroll(page){
     await page.evaluate(async () => {
         await new Promise((resolve, reject) => {
@@ -71,37 +68,4 @@ async function autoScroll(page){
 
 scrape().then((value) => {
     console.log(value); // Success!
-})
-
-app.get('/get1', (req,res)=> {
-    console.log(req.body)
-    res.send(scrape.result)
-})
-app.post('/post1', async (req,res)=> {
-    console.log(req.body)
-    const data = await scrape()
-    res.send(data)
-})
-// app.post('/post2', (req,res)=> {
-//     console.log(req.body)
-//     const data = {
-//         status: true,
-//         message: 'Detail Data Post',
-//         data: [{
-//             title: "sweater crewneck pria GOOD termurah / bahan fleece lembut dan tebal",
-//             normal_price: 90000 ,
-//             diskon_price: 35100 ,
-//             rating_bintang: 4
-//         },
-//         {
-//             title: "DISTRO II SABLON DIGITAL BERKUALITAS|| KAOS PRIA WANITA",
-//             normal_price: 35000 ,
-//             diskon_price: 13900 +' - '+ 18900 ,
-//             rating_bintang: 4.3
-//         }]
-//     }
-//     res.send(data)
-// })
-app.listen(3000, () => {
-    console.log("Listening on port 3000")
 })
