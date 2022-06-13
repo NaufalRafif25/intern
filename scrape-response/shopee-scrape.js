@@ -12,10 +12,10 @@ let scrape = async () => {
     await page.waitFor(5000);
 
     // ******************************** close popup
-    // await page.evaluate(() => {
-    //     document.querySelector("#main > div > div:nth-child(4) > div > div > shopee-banner-popup-stateful").shadowRoot.querySelector("div > div > div > div > div").click();
-    //    });
-    //    await page.waitFor(6000);
+    await page.evaluate(() => {
+        document.querySelector("#main > div > div:nth-child(4) > div > div > shopee-banner-popup-stateful").shadowRoot.querySelector("div > div > div > div > div").click();
+       });
+       await page.waitFor(6000);
 
     // ***************** Scroll page ke bawah
     await autoScroll(page);
@@ -25,16 +25,16 @@ let scrape = async () => {
     const result = await page.evaluate(() => {
         let data = [];
         
-        let elements = document.querySelectorAll('#main > div > div:nth-child(4) > div > div > div.container > div.section-below-the-fold > div.section-recommend-products-wrapper > div > div > div.stardust-tabs-panels > section:nth-child(1) > div > div:nth-child(1)');
+        let elements = document.querySelectorAll('#main > div > div:nth-child(4) > div > div > div.container > div.section-below-the-fold > div.section-recommend-products-wrapper > div > div > div.stardust-tabs-panels > section:nth-child(1) > div > div');
 
         for (var element of elements) {
-            let image = element.querySelector('#main > div > div:nth-child(4) > div > div > div.container > div.section-below-the-fold > div.section-recommend-products-wrapper > div > div > div.stardust-tabs-panels > section:nth-child(1) > div > div:nth-child(1) > a > div > div > div:nth-child(1) > div > div > img').getAttribute('src');
+            let image = element.querySelector('#main > div > div:nth-child(4) > div > div > div.container > div.section-below-the-fold > div.section-recommend-products-wrapper > div > div > div.stardust-tabs-panels > section:nth-child(1) > div > div:nth-child(1) > a > div > div > div.n-CE6j.iR\+sxV > img').getAttribute('src');
 
             let link = "https://shopee.co.id/"+element.querySelector('#main > div > div:nth-child(4) > div > div > div.container > div.section-below-the-fold > div.section-recommend-products-wrapper > div > div > div.stardust-tabs-panels > section:nth-child(1) > div > div:nth-child(1) > a').getAttribute('href');
 
             let title = element.querySelector('#main > div > div:nth-child(4) > div > div > div.container > div.section-below-the-fold > div.section-recommend-products-wrapper > div > div > div.stardust-tabs-panels > section:nth-child(1) > div > div:nth-child(1) > a > div > div > div.W3bJfG > div.qUEEG4 > div > div').innerText;
 
-            let price = element.querySelector('#main > div > div:nth-child(4) > div > div > div.container > div.section-below-the-fold > div.section-recommend-products-wrapper > div > div > div.stardust-tabs-panels > section:nth-child(1) > div > div:nth-child(1) > a > div > div > div.W3bJfG > div.imdVqB._2fuFWg > div.WSVId4.fepoRf > span:nth-child(2)').innerText;
+            let price = element.querySelector('#main > div > div:nth-child(4) > div > div > div.container > div.section-below-the-fold > div.section-recommend-products-wrapper > div > div > div.stardust-tabs-panels > section:nth-child(1) > div > div:nth-child(1) > a > div > div > div.W3bJfG > div.imdVqB._2fuFWg > div.WSVId4.fepoRf > span.j0vBz2').innerText;
 
             data.push({image, link, title, price});
         }

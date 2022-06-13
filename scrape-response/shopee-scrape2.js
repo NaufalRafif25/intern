@@ -12,12 +12,12 @@ let scrape = async () => {
     await page.waitFor(5000);
 
     // ******************************** close popup
-    // await page.evaluate(() => {
-    //     document.querySelector("#main > div > div:nth-child(4) > div > div > shopee-banner-popup-stateful").shadowRoot.querySelector("div > div > div > div > div").click();
-    //    });
-    //    await page.waitFor(6000);
-    // ***************** Scroll page ke bawah
+    await page.evaluate(() => {
+        document.querySelector("#main > div > div:nth-child(4) > div > div > shopee-banner-popup-stateful").shadowRoot.querySelector("div > div > div > div > div").click();
+       });
+       await page.waitFor(6000);
 
+    // ***************** Scroll page ke bawah
     await autoScroll(page);
     await page.waitFor(5000);
 
